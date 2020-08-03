@@ -1,0 +1,141 @@
+<!--
+
+Eventos
+1.	Criar uma página HTML vazia com a estrutura básica (html, head e body)
+2.	Adicionar um botão ao html com a legenda “Cumprimentar” que, ao ser clicado (onclick) mostre um alerta que diga “olá”.
+3.	Adicionar outro botão ao html com a legenda “Alterar Fundo” que, quando clicado (onclick) troque a cor do fundo do body para verde.
+4.	Adicionar à página uma imagem que, ao passar do mouse em cima ela, imprima na linha de comando (“estou vendo a imagem”);
+5.	Adicionar outra imagem à página que, quando clicada, utilizando addEventListener, imprima na linha de comando (“estou clicando na imagem”).
+6.	Definir um addEventListener de forma que, quando o usuário clicar em qualquer parte do body da página, a cor de fundo do body todo mude para vermelho. Para isso, usar o this da função do evento.
+7.	O usuário é meio chato e, agora, pediu para remover o listener que criamos recentemente, já que ele não consegue interagir bem com a página.
+8.	Criar um formulário básico com um action que redirecione para www.google.com.br. Usando JavaScript, fazer com que, quando o usuário clicar em Enviar, o formulário não seja enviado, mas sim que seja exibido um alert dizendo “Não é possível enviar”. 
+9.	Fazer com que o addEventListener criado na imagem imprima em linha de comando a localização do mouse em x e y.
+
+
+Timers
+1.	Em uma página HTML básica (podemos usar a mesma de Eventos), fazer com que, se o usuário passar 10 segundos nessa página, seja exibido um alert que diga “tempo esgotado!”
+
+2.	A cada 5 segundos que ele passe na página, fazer com que seja exibido um alert que diga “hora do intervalo”. 
+
+-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content type" content="text/html" />
+    <meta http-equiv="X-UA Compatible" content="IE-edge,chrome-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercícios</title>
+
+    <style>
+        body {
+            height: 1500px;
+        }
+
+        .fundo {
+            background-color: white;
+        }
+
+        .fundo1 {
+            background-color: green;
+        }
+
+        .fundo2 {
+            background-color: red;
+        }
+
+        .imagemlinha1 {
+            margin: 10px 15px;
+        }
+
+        .form1 {
+            margin:15px 15px;
+        }
+
+    </style>
+
+    <script>
+
+        //3
+        function mudarCor() {
+            var obj = document.getElementById('body');
+            if (obj.className == 'fundo1') {
+                obj.className = 'fundo';
+            } else {
+                obj.className = 'fundo1';
+            }
+        }
+
+        //5
+        function mensagemClicando() {
+            console.log('Estou clicando na imagem')
+        }
+
+        function clicando() {
+            var clicando = document.getElementById('imagemclicando')
+            clicando.addEventListener("click", mensagemClicando)
+        }
+
+        //6
+        function aplicacaoCorVermelha() {
+            var aplicando = document.getElementById('body')
+            aplicando.addEventListener("click", function clicandoBody() {
+                aplicando.style.backgroundColor = "red";
+                console.log(this.aplicando)
+            }, true);
+        }
+
+        //7
+        function aplicacaoCorVermelha() {
+            Document.getElementById('body').removeEventListener("click", clicandoBody(), true)
+        }
+
+        function mudarAction() {
+            window.alert('Não é possivel enviar')
+        }
+
+        //9
+        window.addEventListener('mousemove', function (e) {
+            console.log('x: ' +  e.x + ' ' + 'y: ' + e.y );
+        })
+
+        //Timers 1
+        setTimeout(function(){ 
+            alert("Tempo esgotado"); }, 10000);
+
+        //Timers 2
+        setInterval(function(){ 
+            alert("Hora do intervalo"); }, 5000);
+
+
+    </script>
+
+</head>
+
+<body id='body' class='fundo' onmousedown="aplicacaoCorVermelha()">
+
+    <button class="botao01" style="border: 2px solid lightpink; margin: 5px 15px;"
+        onclick="window.alert('Olá')">Cumprimentar</button>
+        <button class="botao02" style="border: 2px solid lightpink; margin: 5px 15px;" onclick="mudarCor()">Alterar
+            fundo</button>
+        <div class="imagemlinha1">
+            <img src="IMAGEMVENDO.png" alt="imagempergunta"
+                onmouseover="console.log('Estou vendo a imagem') + window.alert('Estou vendo a imagem')">
+            <img id="imagemclicando" src="IMAGEMCLICANDO.png" alt="imagempergunta" onmousedown="clicando()">
+        </div>
+
+        <div class="form1">
+            <form id="formulario" name="formulario" method="post" action="https://google.com">
+                <label>Nome</label>
+                <input id="txtnome" name="txtnome" type="text" />
+                <label>E-mail</label>
+                <input id="txtnome" name="txtnome" type="text" />
+                  <input id="btnenviar1" name="btnenviar1" type="submit" value="Enviar" onClick="mudarAction()" />
+                 </form>
+        </div>
+
+</body>
+
+</html>
